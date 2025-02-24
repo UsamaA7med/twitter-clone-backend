@@ -1,13 +1,27 @@
 import express from "express";
 import "dotenv/config";
-import cookie from "cookie-parser";
+import cookieParser from "cookie-parser";
 import connectToDB from "./config/connectToDB.js";
-import userRouter from "./routes/userRouter.js";
+
+import corse from "cors";
+import authRouter from "./routes/authRouter.js";
 
 const app = express();
 
 app.use(express.json());
-app.use(cookie());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
+// app.use(
+//   corse({
+//     origin: "*",
+//     credentials: true,
+//     allowedHeaders: ["Content-Type", "Authorization", "withcredentials"],
+//     methods: "GET, POST, PUT, DELETE",
+//     preflightContinue: false,
+//     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   })
+// );
 
 app.listen(process.env.PORT_NUMBER, async (req, res) => {
   console.log(`Server is running on port ${process.env.PORT_NUMBER}`);
@@ -15,7 +29,7 @@ app.listen(process.env.PORT_NUMBER, async (req, res) => {
 
 connectToDB();
 
-app.get("/api/auth", userRouter);
+app.use("/api/auth", authRouter);
 
 app.use((error, req, res, next) => {
   res
