@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    link: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
@@ -46,6 +50,21 @@ const validateCreateUser = (body) => {
   return schema.validate(body);
 };
 
+const validateUpdateUser = (body) => {
+  const schema = Joi.object({
+    userName: Joi.string(),
+    fullName: Joi.string(),
+    email: Joi.string().email(),
+    currentPassword: Joi.string().min(6),
+    newPassword: Joi.string().min(6),
+    profileImage: Joi.string(),
+    coverImage: Joi.string(),
+    bio: Joi.string(),
+    link: Joi.string(),
+  });
+  return schema.validate(body);
+};
+
 const User = mongoose.model("User", userSchema);
 
-export { User, validateCreateUser };
+export { User, validateCreateUser, validateUpdateUser };

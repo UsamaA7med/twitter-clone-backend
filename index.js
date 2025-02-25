@@ -5,6 +5,7 @@ import connectToDB from "./config/connectToDB.js";
 
 import corse from "cors";
 import authRouter from "./routes/authRouter.js";
+import { userRouter } from "./routes/userRouter.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.listen(process.env.PORT_NUMBER, async (req, res) => {
 connectToDB();
 
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 app.use((error, req, res, next) => {
   res
