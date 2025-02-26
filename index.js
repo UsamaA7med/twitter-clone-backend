@@ -37,6 +37,10 @@ app.use("/api/user", userRouter);
 app.use("/api/post", postRouter);
 app.use("/api/notification", notificationRouter);
 
+app.get("/", async (req, res) => {
+  res.json({ message: "Welcome to twitter clone api" });
+});
+
 app.use((error, req, res, next) => {
   res
     .status(error.statusCode)
