@@ -6,6 +6,7 @@ import connectToDB from "./config/connectToDB.js";
 import corse from "cors";
 import authRouter from "./routes/authRouter.js";
 import { userRouter } from "./routes/userRouter.js";
+import postRouter from "./routes/postRouter.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ connectToDB();
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
 
 app.use((error, req, res, next) => {
   res
