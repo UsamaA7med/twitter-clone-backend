@@ -15,16 +15,16 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(
-//   corse({
-//     origin: "*",
-//     credentials: true,
-//     allowedHeaders: ["Content-Type", "Authorization", "withcredentials"],
-//     methods: "GET, POST, PUT, DELETE",
-//     preflightContinue: false,
-//     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-//   })
-// );
+app.use(
+  corse({
+    origin: "http://localhost:5173",
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "withcredentials"],
+    methods: "GET, POST, PUT, DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  })
+);
 
 app.listen(process.env.PORT_NUMBER, async (req, res) => {
   console.log(`Server is running on port ${process.env.PORT_NUMBER}`);
