@@ -15,5 +15,6 @@ export default async (username, email, fullname, id, res) => {
   res.cookie("jwt", token, {
     httpOnly: true,
     secure: false,
+    samesite: false,
   });
 };
