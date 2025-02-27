@@ -16,5 +16,6 @@ export default async (username, email, fullname, id, res) => {
     httpOnly: true,
     secure: false,
     samesite: false,
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
   });
 };
