@@ -14,8 +14,6 @@ export default async (username, email, fullname, id, res) => {
   );
   res.cookie("jwt", token, {
     httpOnly: true,
-    sameSite: "none",
-    secure: true, // set to true for production
-    maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    secure: false,
   });
 };
